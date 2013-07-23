@@ -90,11 +90,14 @@ Request.prototype.send = function () {
 Request.prototype.setHeaders = function () {
     var that = this,
         headers = that.headers,
+        xhr = that.xhr,
         key;
 
-    for (key in headers) {
-        if (headers.hasOwnProperty(key)) {
-            that.xhr.setRequestHeader(key, headers[key]);
+    if (xhr.setRequestHeader) {
+        for (key in headers) {
+            if (headers.hasOwnProperty(key)) {
+                xhr.setRequestHeader(key, headers[key]);
+            }
         }
     }
 
